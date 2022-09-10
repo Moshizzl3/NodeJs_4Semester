@@ -10,7 +10,7 @@ const weaponsList = [
 //GET requests go here
 
 app.get("/weapons", (req, res) => {
-  res.send(weaponsList); //TODO returs as an array, not as a list.. Should maybe be done diffrently
+  res.send(weaponsList);
 });
 
 app.get("/weapons/:id", (req, res) => {
@@ -19,27 +19,13 @@ app.get("/weapons/:id", (req, res) => {
   res.send(weapon);
 });
 
-app.get("/new-weapon", (req, res) => {
-  const weapon = {
-    id: Number(req.query.id),
-    name: req.query.name,
-    isAutomatic: Boolean(req.query.isAutomatic),
-  };
-  weaponsList.push(weapon);
-  console.log(weaponsList);
-
-  res.send(`${weapon.name} has now been saved`);
-});
-
-
 //Post requests go here
 
 //Put requests go here
 
+//Patch requests go here
+
 //Delete requests go here
-
-
-
 
 app.listen(8080, () => {
   console.log("Server is listning");
