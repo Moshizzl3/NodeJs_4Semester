@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json());
+
 const weaponsList = [
   { id: 1, name: "Shotgun", isAutomatic: false },
   { id: 2, name: "Gun", isAutomatic: false },
@@ -10,7 +12,7 @@ const weaponsList = [
 //GET requests go here
 
 app.get("/weapons", (req, res) => {
-  res.send(weaponsList); 
+  res.send({ data: weaponsList });
 });
 
 app.get("/weapons/:id", (req, res) => {
@@ -31,7 +33,6 @@ app.get("/new-weapon", (req, res) => {
   res.send(`${weapon.name} has now been saved`);
 });
 
-
 //Post requests go here
 
 //Put requests go here
@@ -39,9 +40,6 @@ app.get("/new-weapon", (req, res) => {
 //Patch requests go here
 
 //Delete requests go here
-
-
-
 
 app.listen(8080, () => {
   console.log("Server is listning");
