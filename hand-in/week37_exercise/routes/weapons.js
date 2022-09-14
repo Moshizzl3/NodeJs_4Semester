@@ -66,11 +66,10 @@ weaponsRouter.put("/weapons/:id", (req, res) => {
 
   if (weapons.some((wep) => wep.id === id)) {
     let index = weapons.findIndex((wep) => wep.id === id);
-    let updatedWeapon = {
+    weapons[index] = {
       id: id,
       ...body,
     };
-    weapons[index] = updatedWeapon;
 
     res.status(200).send(`${req.body.name} has now been changed`);
   } else {
@@ -83,15 +82,15 @@ weaponsRouter.put("/weapons/:id", (req, res) => {
 weaponsRouter.patch("/weapons/:id", (req, res) => {
   const id = Number(req.params.id);
   let body = { ...req.body };
-  let index = weapons.findIndex((wep) => wep.id === id);
+  let wep = weapons.find((wep) => wep.id === id);
 
   if (weapons.some((wep) => wep.id === id)) {
     for (let i in body) {
       if (body[i]) {
-        weapons[index][i] = body[i];
+        wep[i] = body[i];
       }
     }
-    res.status(200).send(`${weapons[index].name} has now been changed`);
+    res.status(200).send(`${wep.name} has now been changed`);
   } else {
     res.status(200).send("No weapon with that id found");
   }
@@ -104,7 +103,6 @@ weaponsRouter.delete("/weapons/:id", (req, res) => {
 
   if (weapons.some((wep) => wep.id === id)) {
     const index = weapons.findIndex((weap) => weap.id === id);
-    console.log(index);
     weapons.splice(index, 1);
     res.status(200).send(weapons);
   } else {
