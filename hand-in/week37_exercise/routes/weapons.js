@@ -17,11 +17,11 @@ weaponsRouter.get("/weapons", (req, res) => {
 
 weaponsRouter.get("/weapons/:id", (req, res) => {
   const id = Number(req.params.id);
-  if (weapons.some((wep) => wep.id === id)) {
-    const weapon = weapons.find((weap) => weap.id === id);
+  const weapon = weapons.find((weap) => weap.id === id);
+  if (weapon) {
     res.status(200).send(weapon);
   } else {
-    res.status(200).send("No weapon with that id found");
+    res.status(404).send("No weapon with that id found");
   }
 });
 
@@ -73,7 +73,7 @@ weaponsRouter.put("/weapons/:id", (req, res) => {
 
     res.status(200).send(`${req.body.name} has now been changed`);
   } else {
-    res.status(200).send("No weapon with that id found");
+    res.status(404).send("No weapon with that id found");
   }
 });
 
@@ -84,7 +84,7 @@ weaponsRouter.patch("/weapons/:id", (req, res) => {
   let body = { ...req.body };
   let wep = weapons.find((wep) => wep.id === id);
 
-  if (weapons.some((wep) => wep.id === id)) {
+  if (wep) {
     for (let i in body) {
       if (body[i]) {
         wep[i] = body[i];
@@ -92,7 +92,7 @@ weaponsRouter.patch("/weapons/:id", (req, res) => {
     }
     res.status(200).send(`${wep.name} has now been changed`);
   } else {
-    res.status(200).send("No weapon with that id found");
+    res.status(404).send("No weapon with that id found");
   }
 });
 
@@ -106,6 +106,6 @@ weaponsRouter.delete("/weapons/:id", (req, res) => {
     weapons.splice(index, 1);
     res.status(200).send(weapons);
   } else {
-    res.status(200).send("No weapon with that id found");
+    res.status(404).send("No weapon with that id found");
   }
 });
