@@ -27,32 +27,6 @@ weaponsRouter.get("/weapons/:id", (req, res) => {
 
 //Post requests go here
 
-//post through query string
-/** weaponsRouter.post("/weapons", (req, res) => {
-  const weapon = {
-    id: Number(req.query.id),
-    name: req.query.name,
-    isAutomatic: Boolean(req.query.isAutomatic),
-  };
-  weapons.push(weapon);
-
-  res.status(201).send(`${weapon.name} has now been saved`);
-});**/
-
-//post through params
-weaponsRouter.post("/weapons/:id/:name/:isAutomatic", (req, res) => {
-  const weapon = {
-    id: Number(req.params.id),
-    name: req.params.name,
-    isAutomatic: Boolean(req.params.isAutomatic),
-  };
-  weapons.push(weapon);
-  console.log(weapons);
-
-  res.status(201).send(`${weapon.name} has now been saved`);
-});
-
-//post through req.body
 weaponsRouter.post("/weapons", (req, res) => {
   weapons.push(req.body);
   res.status(201).send(`${req.body.name} has now been saved`);
