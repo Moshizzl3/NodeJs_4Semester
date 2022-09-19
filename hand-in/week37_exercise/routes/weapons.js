@@ -53,7 +53,7 @@ weaponsRouter.put("/weapons/:id", (req, res) => {
 
 //Patch requests go here
 
-weaponsRouter.patch("/weapons/:id", (req, res) => {
+/* weaponsRouter.patch("/weapons/:id", (req, res) => {
   const id = Number(req.params.id);
   let body = { ...req.body };
   let wep = weapons.find((wep) => wep.id === id);
@@ -64,6 +64,18 @@ weaponsRouter.patch("/weapons/:id", (req, res) => {
         wep[i] = body[i];
       }
     }
+    res.status(200).send(`${wep.name} has now been changed`);
+  } else {
+    res.status(404).send("No weapon with that id found");
+  }
+}); */
+
+weaponsRouter.patch("/weapons/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const index = weapons.findIndex((wep) => wep.id === id);
+
+  if (wep) {
+    weapons[index] = { ...weapons[index], ...req.body };
     res.status(200).send(`${wep.name} has now been changed`);
   } else {
     res.status(404).send("No weapon with that id found");

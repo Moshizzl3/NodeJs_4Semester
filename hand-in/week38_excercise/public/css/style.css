@@ -1,0 +1,31 @@
+body {
+    background-color: rgb(10, 42, 53);
+  }
+
+  .container {
+    color: rgb(223, 216, 216);
+
+  }
+
+  .ageBtn {
+    background-color: rgb(155, 162, 143);
+  }
+
+  .outerContainer, .topContainer, .botContainer {
+    border: 1px solid rgb(72, 69, 68); 
+    box-shadow: 2px 2px 5px 6px rgb(37, 43, 45);
+  }
+  .outerContainer {
+    background-color: rgb(11, 46, 57);
+
+  }
+
+  .topContainer, .botContainer {
+    background-color: rgb(14, 51, 62);
+  }
+
+  .contentContainer {
+    background-color: rgb(21, 59, 71);
+    box-shadow: 2px 2px 5px 6px rgb(37, 43, 45);
+  }
+

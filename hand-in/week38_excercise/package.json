@@ -1,0 +1,11 @@
+{
+
+"type": "module",
+"dependencies": {
+    "expres": "^0.0.5"
+},
+"scripts": {
+    "start-dev": "nodemon app.js",
+    "start-prod": "node app.js"
+}
+}
