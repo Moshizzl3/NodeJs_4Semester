@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - planetAge
+name: Build and deploy Node.js app to Azure Web App - planetage
 
 on:
   push:
@@ -23,7 +23,6 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          cd hand-in/week38_excercise
           npm install
           npm run build --if-present
           npm run test --if-present
@@ -51,7 +50,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'planetAge'
+          app-name: 'planetage'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_97564551ABC2463ABE6DEBF08E0FC2FF }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_69649810A7654EBB95A7003A95273CB0 }}
           package: .
