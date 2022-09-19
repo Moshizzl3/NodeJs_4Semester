@@ -40,7 +40,7 @@ function calcAge(offWorldHours, offWorldyears, birthDate) {
   const dateTwo = Date.now();
   const milliseconds = Math.abs(dateOne - dateTwo);
   const hoursAlive = milliseconds / 36e5; //calc from ms to hours
-  const daysAlive = hoursAlive / (24 * 0.99);
+  const daysAlive = hoursAlive / (24);
   const yearsAlive = daysAlive / offWorldyears;
   return Math.round(yearsAlive * 100) / 100;
 }
