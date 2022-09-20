@@ -2,6 +2,8 @@ import express, { json } from "express"
 import path from "path"
 import { planetsRouter } from "./routes/planetsRouter.js";
 
+const port = process.env.PORT || 3000
+
 const app = express();
 app.use(express.json())
 app.use(express.static("public"))
@@ -14,6 +16,6 @@ app.get("/frontpage", (req, res)=>{
 
 
 
-app.listen(8080, ()=>{
-    console.log("Server is running on port:",8080)
+app.listen(port, ()=>{
+    console.log("Server is running on port:")
 })
