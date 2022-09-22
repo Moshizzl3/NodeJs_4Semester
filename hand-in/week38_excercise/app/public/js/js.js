@@ -7,10 +7,10 @@ async function getPlantes() {
 }
 
 async function populatePage() {
-  //const planets = await getPlanets();
+  const planets = await getPlanets();
   const date = document.querySelector("#birthDate");
   planetBoard.innerHTML = "";
-  planets.forEach((planet) => {
+  planets.data.forEach((planet) => {
     const newDiv = document.createElement("div");
     newDiv.innerHTML = `
     <div class="container d-inline-flex contentContainer mt-3">
