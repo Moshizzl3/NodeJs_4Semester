@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_719b573c79214caaba087f520dff7cdc }}/moshizzl3/planets:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./hand-in/week38_excercise/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
