@@ -1,18 +1,94 @@
 import express from "express";
-import path from "path"
+import path from "path";
+import fs from "fs";
 
-const app = express()
+import { renderPage, injectData } from "./utils/templateEngine.js";
+
+const app = express();
 app.use(express.static("public"));
 
 
-app.get("/", (req, res) =>{
+const navComponent = fs
+  .readFileSync("./public/components/navbar/navbar.html")
+  .toString();
+const footerComponent = fs
+  .readFileSync("./public/components/footer/footer.html")
+  .toString();
 
-    res.sendFile(path.resolve("./public/frontpage.html"))
-})
+const frontpage = fs
+  .readFileSync("./public/pages/frontpage/frontpage.html")
+  .toString();
+const battlepage = fs
+  .readFileSync("./public/pages/battle/battle.html")
+  .toString();
+const contactPage = fs
+  .readFileSync("./public/pages/contact-page/contact-page.html")
+  .toString();
 
-app.get("/pokemon", (req, res) =>{
-    res.send({data: ["slowpoke"]})
-})
+const frontpagePage =
+  navComponent
+    .replace("%%TAB_TITLE%%", "Pokemon Frontpage")
+    .replace(
+      "%%Link_Style%%",
+      '<link rel="stylesheet" href="/pages/frontpage/frontpage.css">'
+    ) +
+  frontpage +
+  footerComponent;
+
+const battlepagePage =
+  navComponent
+    .replace(
+      "%%Link_Style%%",
+      '<link rel="stylesheet" href="/pages/battle/battle.css">'
+    ) +
+  battlepage +
+  footerComponent;
+
+const contactpagePage =
+  navComponent.replace("%%TAB_TITLE%%", "Pokemon battlepage") +
+  contactPage +
+  footerComponent;
 
 
-app.listen(8080, () => console.log("server is running"))
+
+app.get("/", (req, res) => {
+  res.send(frontpagePage);
+});
+
+app.get("/battle", (req, res) => {
+  res.redirect("battle/ditto");
+});
+
+app.get("/battle/:pokemonName", (req, res) => {
+  const pokemonName = req.params.pokemonName;
+  let battlepageWithData = injectData(battlepagePage, { pokemonName });
+  res.send(
+    battlepageWithData.replace(
+      "%%TAB_TITLE%%",
+      `Battle ${req.params.pokemonName}`
+    )
+  );
+});
+
+app.get("/contact", (req, res) => {
+  res.send(contactpagePage);
+});
+
+app.get("/pokemon", async (req, res) => {
+  const response = await fetch(
+    "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
+  );
+  const data = await response.json();
+  res.send({ data: data.results });
+});
+
+const PORT = process.env.PORT || 8080;
+
+const server = app.listen(PORT, (error) => {
+  if (error) {
+    console.log(error);
+  }
+  console.log("server is running", server.address().port);
+});
+
+console.log(process.env.PORT);

@@ -1,10 +1,21 @@
 {
-
-"type": "module",    
-"dependencies": {    
+  "type": "module",
+  "dependencies": {
     "express": "^4.18.1"
-},
-"scripts": {
-    "test-script": "ls"
-}
+  },
+  "scripts": {
+    "test-script": "ls",
+    "start-dev": "cross-env PORT=8089 nodemon app.js",
+    "start-prod": "node app.js"
+  },
+  "name": "3_pokemon",
+  "version": "1.0.0",
+  "main": "app.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
 }

@@ -74,7 +74,7 @@ weaponsRouter.patch("/weapons/:id", (req, res) => {
   const id = Number(req.params.id);
   const index = weapons.findIndex((wep) => wep.id === id);
 
-  if (wep) {
+  if (index) {
     weapons[index] = { ...weapons[index], ...req.body };
     res.status(200).send(`${wep.name} has now been changed`);
   } else {
