@@ -1,17 +1,21 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
+import cors from "cors"
 
 import { renderPage, injectData } from "./utils/templateEngine.js";
 import contactRouter from "./routers/contactRouter.js";
+import emailRouter from "./routers/emailRouter.js";
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
+app.use(cors())
 
 
 app.use(express.static("public"));
 app.use(contactRouter);
+app.use(emailRouter);
 
 
 const navComponent = fs
