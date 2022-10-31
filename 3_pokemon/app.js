@@ -3,9 +3,15 @@ import path from "path";
 import fs from "fs";
 
 import { renderPage, injectData } from "./utils/templateEngine.js";
+import contactRouter from "./routers/contactRouter.js";
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+
+
 app.use(express.static("public"));
+app.use(contactRouter);
 
 
 const navComponent = fs
@@ -36,11 +42,10 @@ const frontpagePage =
   footerComponent;
 
 const battlepagePage =
-  navComponent
-    .replace(
-      "%%Link_Style%%",
-      '<link rel="stylesheet" href="/pages/battle/battle.css">'
-    ) +
+  navComponent.replace(
+    "%%Link_Style%%",
+    '<link rel="stylesheet" href="/pages/battle/battle.css">'
+  ) +
   battlepage +
   footerComponent;
 
@@ -48,8 +53,6 @@ const contactpagePage =
   navComponent.replace("%%TAB_TITLE%%", "Pokemon battlepage") +
   contactPage +
   footerComponent;
-
-
 
 app.get("/", (req, res) => {
   res.send(frontpagePage);
