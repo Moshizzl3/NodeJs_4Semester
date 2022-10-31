@@ -1,7 +1,5 @@
 import NodeMailer from 'nodemailer'
 
-let testAccount = await NodeMailer.createTestAccount();
-
 const user = {
     mail: "studie.konto.420@gmail.com",
     password: "wibecilyptpfjlga"
