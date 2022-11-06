@@ -2,7 +2,7 @@ import NodeMailer from "nodemailer";
 
 const user = {
   mail: "studie.konto.420@gmail.com",
-  password: "wibecilyptpfjlga",
+  password: "wibecilyptpfjlga", //
 };
 
 const message = {
@@ -12,23 +12,23 @@ const message = {
 let transporter = NodeMailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
-  secure: false, // true for 465, false for other ports
+  secure: false, 
   auth: {
     user: user.mail, 
     pass: user.password,
   },
 });
 
-// send mail with defined transport object
+// send mail 
 export function sendMail(reciever) {
   return new Promise(async (resolve, reject) => {
     try {
       const mail = await transporter.sendMail({
-        from: `"Study mail 🎃 👻" <${user.mail}>`, // sender address
-        to: `${reciever.mail}`, // list of receivers
-        subject: `Hello ${reciever.name}`, // Subject line
-        text: message.text, // plain text body
-        html: `<b>${message.text}</b>`, // html body
+        from: `"Study mail 🎃 👻" <${user.mail}>`,
+        to: `${reciever.mail}`, 
+        subject: `Hello ${reciever.name}`, 
+        text: message.text, 
+        html: `<b>${message.text}</b>`,
       });
       resolve(mail);
     } catch (err) {
